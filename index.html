@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kue Kering</title>
+  <!-- CSS eksternal -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="image/logo-erge.png" alt="Logo Toko Kue">
+        </div>
+  <div class="container">
+    <h1>-Kue Kering ERGE-</h1>
+    <div id="product-list" class="grid"></div>
+
+    <div class="cart">
+      <h2>Keranjang Belanja</h2>
+      <table id="cart-table" border="1">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="cart-total">Total: Rp 0</p>
+      <button onclick="checkout()">Checkout via WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- JS eksternal -->
+  <script src="js/app.js"></script>
+</body>
+</html>
