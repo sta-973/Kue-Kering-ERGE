@@ -235,7 +235,7 @@ function checkoutWA() {
   // kirim ke pemilik toko
   //window.open(`https://wa.me/${waToko}?text=${encodeURIComponent(message + "\n" + closingMessage)}`, "_blank");
   waToko.forEach(phone => {
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(pesan)}`, "_blank");
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message + "\n" + closingMessage)}`, "_blank");
   });
   
   // kirim juga ke pembeli jika nomor valid
