@@ -197,7 +197,7 @@ function showContact(){ showSection("contact-section"); }
 function checkoutWA(){
   if(!window.cart.length){ alert("Keranjang kosong!"); return; }
 
-  const waNumber = localStorage.getItem("wa_toko") || "628123456789";
+  const waNumber = localStorage.getItem("wa_toko") || "628163171992";
   const customerName = document.getElementById("customer-name").value||"-";
   const customerAddress = document.getElementById("customer-address").value||"-";
   const customerPhone = document.getElementById("customer-phone").value||"-";
@@ -251,3 +251,4 @@ window.onload = ()=>{
   document.getElementById("print-btn").onclick=printStruk;
   document.getElementById("clear-btn").onclick=clearCart;
 };
+
