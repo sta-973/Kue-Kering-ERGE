@@ -215,7 +215,7 @@ function checkoutWA() {
   const ppn = Math.round(total * 0.00);
   const grandTotal = total + ppn;
   message += `\nSubtotal: Rp ${total.toLocaleString('id-ID')}`;
-  message += `\nPPN 11%: Rp ${ppn.toLocaleString('id-ID')}`;
+  message += `\nPPN 0%: Rp ${ppn.toLocaleString('id-ID')}`;
   message += `\nTotal: Rp ${grandTotal.toLocaleString('id-ID')}\n\n`;
   message += `Nama: ${customerName}\nAlamat: ${customerAddress}\nNo HP: ${customerPhone}\n`;
   
@@ -290,3 +290,4 @@ window.onload = ()=>{
   document.getElementById("print-btn").onclick=printStruk;
   document.getElementById("clear-btn").onclick=clearCart;
 };
+
