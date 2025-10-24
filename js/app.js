@@ -212,7 +212,7 @@ function checkoutWA() {
   });
   
   const total = window.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const ppn = Math.round(total * 0.00);
+  const ppn = Math.round(total * 0.0);
   const grandTotal = total + ppn;
   message += `\nSubtotal: Rp ${total.toLocaleString('id-ID')}`;
   message += `\nPPN 0%: Rp ${ppn.toLocaleString('id-ID')}`;
@@ -256,21 +256,6 @@ function checkoutWA() {
   clearCart();
   }
   
-  // ===== SIMPAN KE REKAP =====
-  let orders = JSON.parse(localStorage.getItem("orders")) || [];
-  const orderEntry = {
-    date: new Date().toLocaleString("id-ID"),
-    customerName,
-    customerAddress,
-    customerPhone,
-    items: window.cart.map(i=>({ name: i.name, unit: i.unit, qty: i.qty, price: i.price })),
-    total: grandTotal
-  };
-  orders.push(orderEntry);
-  localStorage.setItem("orders", JSON.stringify(orders));
-
-  clearCart(); // kosongkan keranjang setelah checkout
-}
 
 // ===== CETAK STRUK =====
 function printStruk(){
@@ -290,4 +275,3 @@ window.onload = ()=>{
   document.getElementById("print-btn").onclick=printStruk;
   document.getElementById("clear-btn").onclick=clearCart;
 };
-
