@@ -200,7 +200,7 @@ function checkoutWA() {
   return;
   }
   
-  const waToko = localStorage.getItem("wa_toko") || "628163171992";
+  const waToko = localStorage.getItem("wa_toko") || ["628163171992","6283172379779"];
   const customerName = document.getElementById("customer-name").value || "-";
   const customerAddress = document.getElementById("customer-address").value || "-";
   const customerPhone = document.getElementById("customer-phone").value.replace(/\D/g, "");
@@ -275,4 +275,5 @@ window.onload = ()=>{
   document.getElementById("print-btn").onclick=printStruk;
   document.getElementById("clear-btn").onclick=clearCart;
 };
+
 
