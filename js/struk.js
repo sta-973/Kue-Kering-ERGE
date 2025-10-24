@@ -146,6 +146,17 @@ function printStruk() {
     const pdfURL = URL.createObjectURL(pdfBlob);
     window.open(pdfURL);
 
+// simpan PDF
+if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+  // jika di HP, buka file PDF di tab baru
+  const pdfBlob = doc.output("blob");
+  const blobUrl = URL.createObjectURL(pdfBlob);
+  window.open(blobUrl, "_blank");
+} else {
+  // jika di laptop/PC, tetap simpan otomatis
+  doc.save("struk_TKE.pdf");
+}
+
     // ✅ Simpan otomatis ke file
     doc.save("struk_TKE.pdf");
   }
