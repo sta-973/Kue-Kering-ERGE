@@ -194,29 +194,68 @@ function showMenu(menu){ showSection("products-section"); renderProducts(allProd
 function showContact(){ showSection("contact-section"); }
 
 // ===== CHECKOUT WA =====
-function checkoutWA(){
-  if(!window.cart.length){ alert("Keranjang kosong!"); return; }
-
-  const waNumber = localStorage.getItem("wa_toko") || "628163171992";
-  const customerName = document.getElementById("customer-name").value||"-";
-  const customerAddress = document.getElementById("customer-address").value||"-";
-  const customerPhone = document.getElementById("customer-phone").value||"-";
-
+function checkoutWA() {
+  if (!window.cart.length) {
+  alert("Keranjang kosong!");
+  return;
+  }
+  
+  const waToko = localStorage.getItem("wa_toko") || "628163171992";
+  const customerName = document.getElementById("customer-name").value || "-";
+  const customerAddress = document.getElementById("customer-address").value || "-";
+  const customerPhone = document.getElementById("customer-phone").value.replace(/\D/g, "");
+  
+  // isi pesan pesanan
   let message = `Halo, saya ingin pesan:\n`;
-  window.cart.forEach(item=>{
-    message += `- ${item.name} (${item.unit}) x ${item.qty} = Rp ${(item.price*item.qty).toLocaleString('id-ID')}\n`;
+  window.cart.forEach(item => {
+  message += `- ${item.name} (${item.unit}) x ${item.qty} = Rp ${(item.price * item.qty).toLocaleString('id-ID')}\n`;
   });
-
-  const total = window.cart.reduce((sum,item)=>sum+item.price*item.qty,0);
-  const ppn = Math.round(total*0.11); // 11% PPN
+  
+  const total = window.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const ppn = Math.round(total * 0.00);
   const grandTotal = total + ppn;
   message += `\nSubtotal: Rp ${total.toLocaleString('id-ID')}`;
   message += `\nPPN 11%: Rp ${ppn.toLocaleString('id-ID')}`;
   message += `\nTotal: Rp ${grandTotal.toLocaleString('id-ID')}\n\n`;
-  message += `Nama: ${customerName}\nAlamat: ${customerAddress}\nNo HP: ${customerPhone}`;
-
-  window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`,"_blank");
-
+  message += `Nama: ${customerName}\nAlamat: ${customerAddress}\nNo HP: ${customerPhone}\n`;
+  
+  // deteksi ucapan penutup otomatis menjelang Lebaran 2026
+  const now = new Date();
+  const startLebaran = new Date("2026-04-05");
+  const endLebaran = new Date("2026-04-27");
+  
+  let closingMessage;
+  if (now >= startLebaran && now <= endLebaran) {
+  closingMessage = "Pesanan Anda sudah kami catat dan akan kami proses menjelang Lebaran 🌙✨\nSemoga persiapan hari raya Anda lancar dan penuh berkah 🙏\nSelamat menunaikan ibadah Ramadan dan Selamat Hari Raya Idul Fitri 1447 H 🌙";
+  } else {
+  closingMessage = "Terima kasih sudah memesan di *Toko Kue ERGE!* 😊\nPesanan Anda akan kami proses sesuai jadwal yang disepakati.";
+  }
+  
+  // kirim ke pemilik toko
+  window.open(`https://wa.me/${waToko}?text=${encodeURIComponent(message + "\n" + closingMessage)}`, "_blank");
+  
+  // kirim juga ke pembeli jika nomor valid
+  if (customerPhone && customerPhone.length >= 9) {
+  setTimeout(() => {
+  window.open(`https://wa.me/${customerPhone}?text=${encodeURIComponent("Terima kasih sudah memesan di *Toko Kue ERGE!* Berikut salinan pesanan Anda:\n\n" + message + "\n" + closingMessage)}`, "_blank");
+  }, 1500);
+  }
+  
+  // simpan ke rekap lokal
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  orders.push({
+  date: new Date().toLocaleString("id-ID"),
+  customerName,
+  customerAddress,
+  customerPhone,
+  items: window.cart.map(i => ({ name: i.name, unit: i.unit, qty: i.qty, price: i.price })),
+  total: grandTotal
+  });
+  localStorage.setItem("orders", JSON.stringify(orders));
+  
+  clearCart();
+  }
+  
   // ===== SIMPAN KE REKAP =====
   let orders = JSON.parse(localStorage.getItem("orders")) || [];
   const orderEntry = {
@@ -251,4 +290,3 @@ window.onload = ()=>{
   document.getElementById("print-btn").onclick=printStruk;
   document.getElementById("clear-btn").onclick=clearCart;
 };
-
