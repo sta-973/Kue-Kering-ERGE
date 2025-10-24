@@ -200,7 +200,8 @@ function checkoutWA() {
   return;
   }
   
-  const waToko = localStorage.getItem("wa_toko") || ["628163171992","6283172379779"];
+ // ambil dari localStorage kalau ada, kalau tidak pakai default dua nomor
+  const waToko = JSON.parse(localStorage.getItem("wa_toko")) || ["628163171992", "6283172379779"];
   const customerName = document.getElementById("customer-name").value || "-";
   const customerAddress = document.getElementById("customer-address").value || "-";
   const customerPhone = document.getElementById("customer-phone").value.replace(/\D/g, "");
@@ -228,11 +229,14 @@ function checkoutWA() {
   if (now >= startLebaran && now <= endLebaran) {
   closingMessage = "Pesanan Anda sudah kami catat dan akan kami proses menjelang Lebaran 🌙✨\nSemoga persiapan hari raya Anda lancar dan penuh berkah 🙏\nSelamat menunaikan ibadah Ramadan dan Selamat Hari Raya Idul Fitri 1447 H 🌙";
   } else {
-  closingMessage = "Terima kasih sudah memesan di *Toko Kue ERGE!* 😊\nPesanan Anda akan kami proses.";
+  closingMessage = "Terima kasih sudah memesan di *Toko Kue ERGE!* 😊\nPesanan Anda akan kami proses sesuai jadwal yang disepakati.";
   }
   
   // kirim ke pemilik toko
-  window.open(`https://wa.me/${waToko}?text=${encodeURIComponent(message + "\n" + closingMessage)}`, "_blank");
+  //window.open(`https://wa.me/${waToko}?text=${encodeURIComponent(message + "\n" + closingMessage)}`, "_blank");
+  waToko.forEach(phone => {
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(pesan)}`, "_blank");
+  });
   
   // kirim juga ke pembeli jika nomor valid
   if (customerPhone && customerPhone.length >= 9) {
@@ -275,5 +279,3 @@ window.onload = ()=>{
   document.getElementById("print-btn").onclick=printStruk;
   document.getElementById("clear-btn").onclick=clearCart;
 };
-
-
