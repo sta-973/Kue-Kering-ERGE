@@ -68,7 +68,7 @@ function sendEmailRekap(){
   });
 
   emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
-      to_email: "admin@example.com",
+      to_email: "womisa2008@gmail.com",
       subject: "Rekap Pesanan Harian",
       message: csv
   }).then(res=>console.log("Email terkirim"),err=>console.error(err));
@@ -85,3 +85,4 @@ function scheduleEmail(){
 
 // 🔹 Pastikan ini dipanggil di akhir admin.js
 scheduleEmail();
+
