@@ -228,7 +228,7 @@ function checkoutWA() {
   if (now >= startLebaran && now <= endLebaran) {
   closingMessage = "Pesanan Anda sudah kami catat dan akan kami proses menjelang Lebaran 🌙✨\nSemoga persiapan hari raya Anda lancar dan penuh berkah 🙏\nSelamat menunaikan ibadah Ramadan dan Selamat Hari Raya Idul Fitri 1447 H 🌙";
   } else {
-  closingMessage = "Terima kasih sudah memesan di *Toko Kue ERGE!* 😊\nPesanan Anda akan kami proses sesuai jadwal yang disepakati.";
+  closingMessage = "Terima kasih sudah memesan di *Toko Kue ERGE!* 😊\nPesanan Anda akan kami proses.";
   }
   
   // kirim ke pemilik toko
@@ -275,3 +275,4 @@ window.onload = ()=>{
   document.getElementById("print-btn").onclick=printStruk;
   document.getElementById("clear-btn").onclick=clearCart;
 };
+
