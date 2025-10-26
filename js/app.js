@@ -201,7 +201,7 @@ function checkoutWA() {
   }
   
  // ambil dari localStorage kalau ada, kalau tidak pakai default dua nomor
-  const waToko = JSON.parse(localStorage.getItem("wa_toko")) || ["628163171992", "6283172379779"];
+const waToko = JSON.parse(localStorage.getItem("wa_toko")) || ["628163171992", "6283172379779"];
   const customerName = document.getElementById("customer-name").value || "-";
   const customerAddress = document.getElementById("customer-address").value || "-";
   const customerPhone = document.getElementById("customer-phone").value.replace(/\D/g, "");
@@ -234,9 +234,6 @@ function checkoutWA() {
   
   // kirim ke pemilik toko
   //window.open(`https://wa.me/${waToko}?text=${encodeURIComponent(message + "\n" + closingMessage)}`, "_blank");
-  waToko.forEach(phone => {
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message + "\n" + closingMessage)}`, "_blank");
-  });
   
   // kirim juga ke pembeli jika nomor valid
   if (customerPhone && customerPhone.length >= 9) {
